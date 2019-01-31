@@ -35,26 +35,39 @@ export default class Home extends Component {
     }
 }
 
-const LinksContainer = styled.div`
-    display: grid;
-    height: 93vh;
-	background-color: #d9dfe1;
+const sandBrown = '#f2aa7a';
+const peru = '#c28a5d';
+const darkSlate = '#121514';
+const lightSteel = '#d9dfe1';
+const slateGray = '#7d97a0';
 
+const LinksContainer = styled.div`
+    height: 89vh;
+    padding: 1vh 2em;
+    
+    display: grid;
 	grid-template-columns: repeat(5, 1fr);
     grid-gap: 2em;
     align-items: flex-start;
+    background-color: ${lightSteel};
 `;
 
 const StyledLink = styled(Link)`
     display: block;
-    background-color: #d9dfe1;
-    border: 2px solid #f2aa7a;
+    background-color: ${lightSteel};
+    border: 2px solid ${sandBrown};
+    border-radius: 2em;
+    padding: 7vh 0;
     text-decoration: none;
-    color: black;
+    color: ${slateGray};
+
+    &:hover {
+        background-color: ${sandBrown};
+    }
 `;
 
 const StyledButtonLink = styled.div`
     text-align: center;
     padding: 2em 0;
-    color: black;
+    color: ${darkSlate};
 `;

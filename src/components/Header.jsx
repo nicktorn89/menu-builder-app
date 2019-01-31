@@ -23,10 +23,16 @@ export default class Header extends Component {
     }
 };
 
+const sandBrown = '#f2aa7a';
+const peru = '#c28a5d';
+const darkSlate = '#121514';
+const lightSteel = '#d9dfe1';
+const slateGray = '#7d97a0';
+
 const HeaderContainer = styled.header`
     padding: 3.5vh 0 3.5vh 1em;
-    background-color: #7d97a0;
-    border-bottom: 1px solid #d9dfe1;
+    background-color: ${slateGray};
+    border-bottom: 1px solid ${lightSteel};
 `;
 
 const MainHeading = styled.h1`
@@ -36,6 +42,13 @@ const MainHeading = styled.h1`
 const HeaderLink = styled(Link)`
     margin-left: 1em;
     text-decoration: none;
-    color: black;
+    color: ${darkSlate};
     font-size: 1.2rem;
+    transition-property: color, font-weight;
+    transition-duration: 0.3s;
+
+    &:hover {
+        color: ${sandBrown};
+        font-weight: 900;
+    }
 `;
