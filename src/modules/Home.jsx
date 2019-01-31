@@ -5,30 +5,35 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 
 export default class Home extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            allLinks: [
+                '/about', '/build-menu',
+                '/add-dish', '/food-store',
+                '/budget-settings',
+            ],
+            allTitles: [
+                'About', 'Build menu',
+                'Add new dish', 'Store with food',
+                'Budget'],
+        };
+    }
+
     render() {
+        const { allLinks, allTitles } = this.state;
+        
+        const showLinks = allLinks.map((key, index) => (
+            <StyledLink key={index} to={key}>
+                <StyledButtonLink>{allTitles[index]}</StyledButtonLink>
+            </StyledLink>
+        ));
+
         return (
             <Fragment>
                 <Header home={ true } />
                 <LinksContainer>
-                    <StyledLink to="/about">
-                        <StyledButtonLink>About</StyledButtonLink>
-                    </StyledLink>
-
-                    <StyledLink to="/build-menu">
-                        <StyledButtonLink>Build menu</StyledButtonLink>
-                    </StyledLink>
-
-                    <StyledLink to="/add-dish">
-                        <StyledButtonLink>Add new dish</StyledButtonLink>
-                    </StyledLink>
-                    
-                    <StyledLink to="/food-store">
-                        <StyledButtonLink>Store with food</StyledButtonLink>
-                    </StyledLink>
-                    
-                    <StyledLink to="/budget-settings">
-                        <StyledButtonLink>Budget</StyledButtonLink>
-                    </StyledLink>
+                    {showLinks}
                 </LinksContainer>
             </Fragment>
         );
