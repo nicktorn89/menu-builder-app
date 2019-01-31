@@ -36,6 +36,8 @@ const HeaderContainer = styled.header`
 `;
 
 const MainHeading = styled.h1`
+    @import url('https://fonts.googleapis.com/css?family=Montserrat+Alternates');
+    font-family: 'Montserrat Alternates', sans-serif;
     font-size: 2rem;
 `;
 

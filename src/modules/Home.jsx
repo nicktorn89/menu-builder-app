@@ -67,6 +67,10 @@ const StyledLink = styled(Link)`
 `;
 
 const StyledButtonLink = styled.div`
+    @import url('https://fonts.googleapis.com/css?family=Cuprum');
+
+    font-family: 'Cuprum', sans-serif;
+    font-size: 1.5em;
     text-align: center;
     padding: 2em 0;
     color: ${darkSlate};

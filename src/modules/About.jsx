@@ -12,11 +12,28 @@ export default class About extends Component {
       	<Header />
 
         <PageContainer>
-          <div>
-            Hello!
-          </div>
+          <AboutHeading>
+            About Menu-builder-app
+          </AboutHeading>
+
+          <AboutParagraph>
+            This program should help you with solve problems with menu!
+          </AboutParagraph>
         </PageContainer>
       </React.Fragment>
     );
   }
-}
+};
+
+const AboutHeading = styled.h2`
+  font-size: 2.5rem;
+  margin: 1rem 0;
+  text-align: center;
+`;
+
+const AboutParagraph = styled.p`
+  width: 90%;
+  margin: 0 auto;
+  font-size: 1.3rem;
+  color: red;
+`;
