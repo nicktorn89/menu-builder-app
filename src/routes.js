@@ -14,10 +14,6 @@ class Routes extends Component {
     return(
       <Router>
         <div>
-          <header>
-            Menu Builder App
-          </header>
-
           <Route exact path="/" component={Home} />
           <Route path="/build-menu" component={BuildMenu} />
           <Route path="/add-dish" component={AddDish} />
