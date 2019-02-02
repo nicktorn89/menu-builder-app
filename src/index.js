@@ -6,9 +6,9 @@ import './styles/reset.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faRedo} from '@fortawesome/free-solid-svg-icons';
 
-library.add(faArrowLeft);
+library.add(faArrowLeft, faRedo);
 
 ReactDOM.render(<Routes />, document.getElementById('root'));
 

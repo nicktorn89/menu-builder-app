@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export default function PageContainer(props) {
+export default function PageContainer({className, children}) {
     return (
-        <ContainerDiv>
-            {props.children}
+        <ContainerDiv className={className}>
+            {children}
          </ContainerDiv>
     );
 };
