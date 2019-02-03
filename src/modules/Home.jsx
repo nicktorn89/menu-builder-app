@@ -14,9 +14,9 @@ export default class Home extends Component {
                 '/budget-settings',
             ],
             allTitles: [
-                'About', 'Build menu',
-                'Add new dish', 'Store with food',
-                'Budget'],
+                'О приложении', 'Построить меню',
+                'Добавить новое блюдо', 'Хранилище',
+                'Бюджет'],
         };
     }
 

@@ -13,7 +13,7 @@ export default class Header extends Component {
                 { this.props.home ?
                 <i></i> :
                 <HeaderLink to="/">
-                    Go to home page 
+                    Перейти на домашнюю страницу 
                     <FontAwesomeIcon style={{marginLeft: 5}} icon='arrow-left'/> 
                 </HeaderLink>
                 }

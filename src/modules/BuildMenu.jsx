@@ -16,8 +16,8 @@ export default class BuildMenu extends Component {
   constructor(props){
     super(props);
     this.state = {
-      daysArray: ['Monday', 'Tuesday', 
-    'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+      daysArray: ['Понедельник', 'Вторник', 
+    'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'],
       mainDishes: mainData,
       subDishes: subData,
     }
@@ -101,7 +101,7 @@ export default class BuildMenu extends Component {
 
         <BuildMenuContainer>
           {showDays}
-          <BuildMenuButton onClick={this.handleBuildMenu.bind(this)} text="Build menu"/>
+          <BuildMenuButton onClick={this.handleBuildMenu.bind(this)} text="Построить меню"/>
         </BuildMenuContainer>
       </React.Fragment>
     );
