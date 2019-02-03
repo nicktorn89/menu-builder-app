@@ -4,7 +4,7 @@ import Button from './Button';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function Day({ dayHeading, mainDish, subDish, onClick}) {
+export default function Day({ dayHeading, mainDish, subDish, onClick, index }) {
     return(
         <DayContainer>
             <DayHeading>
@@ -13,14 +13,14 @@ export default function Day({ dayHeading, mainDish, subDish, onClick}) {
 
             <MainDishContainer>
                 <span>{mainDish}</span>
-                <DayButton onClick={onClick}>
+                <DayButton className={`main-${index}`} onClick={onClick}>
                     <FontAwesomeIcon style={{marginLeft: 5}} icon='redo'/> 
                 </DayButton>
             </MainDishContainer>
 
             <SubDishContainer>
                 <span>{subDish}</span>
-                <DayButton onClick={onClick}>
+                <DayButton className={`sub-${index}`} onClick={onClick}>
                     <FontAwesomeIcon style={{marginLeft: 5}} icon='redo'/> 
                 </DayButton>
             </SubDishContainer>

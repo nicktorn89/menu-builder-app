@@ -24,6 +24,7 @@ export default class BuildMenu extends Component {
 
     this.shuffleArray = this.shuffleArray.bind(this);
     this.changeAllDishes = this.changeAllDishes.bind(this);
+    this.changeOneDish = this.changeOneDish.bind(this);
   }
 
   shuffleArray(array) {
@@ -39,10 +40,37 @@ export default class BuildMenu extends Component {
     newMainDishes = this.shuffleArray(newMainDishes);
     newSubDishes = this.shuffleArray(newSubDishes);
 
+    newMainDishes = newMainDishes.slice(0, 7);
+    newSubDishes = newSubDishes.slice(0, 7);
+
     this.setState({
       mainDishes: newMainDishes,
       subDishes: newSubDishes,
     });
+  }
+
+  changeOneDish(event) {
+    const { target } = event;
+
+    if (target.tagName === 'svg') {
+      const { classList } = target.parentNode;
+      const classIndex = classList[0][classList[0].length-1];
+
+      const setNewDishes = (array, data, stateName) => {
+        let newDishes = array;
+        const shuffledDishes = this.shuffleArray(data);
+        newDishes[classIndex] = shuffledDishes[0];
+        this.setState({
+          [stateName]: newDishes,
+        });
+      };
+
+      if( classList[0].search(/main-/i) >= 0) {
+        setNewDishes(this.state.mainDishes, mainData, 'mainDishes');
+      } else {
+        setNewDishes(this.state.subDishes, subData, 'subDishes');
+      }
+    }
   }
 
   handleBuildMenu() {
@@ -60,7 +88,10 @@ export default class BuildMenu extends Component {
       <Day key={index} 
       dayHeading={key}
       mainDish={mainDishes[index]}
-      subDish={subDishes[index]}/>
+      subDish={subDishes[index]}
+      onClick={this.changeOneDish}
+      index={index}
+      />
     ));
 
     return (
@@ -77,6 +108,7 @@ export default class BuildMenu extends Component {
 }
 
 const BuildMenuContainer = styled(PageContainer)`
+  height: 90vh;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1rem;
