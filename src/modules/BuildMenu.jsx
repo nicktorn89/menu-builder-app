@@ -91,6 +91,7 @@ export default class BuildMenu extends Component {
       subDish={subDishes[index]}
       onClick={this.changeOneDish}
       index={index}
+      haveSub={index % 2 !== 0}
       />
     ));
 
@@ -106,6 +107,8 @@ export default class BuildMenu extends Component {
     );
   }
 }
+
+const sandBrownTransparent = '#f2aa7a80';
 
 const BuildMenuContainer = styled(PageContainer)`
   height: 90vh;
@@ -123,4 +126,5 @@ const BuildMenuButton = styled(Button)`
   padding: 1em 0;
   align-self: center;
   justify-self: center;
+  background-color: ${sandBrownTransparent};
 `;
