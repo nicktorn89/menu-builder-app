@@ -41,7 +41,6 @@ export default class Home extends Component {
 }
 
 const sandBrown = '#f2aa7a';
-const peru = '#c28a5d';
 const darkSlate = '#121514';
 const lightSteel = '#d9dfe1';
 const slateGray = '#7d97a0';

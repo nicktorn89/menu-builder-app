@@ -37,8 +37,8 @@ export default class BuildMenu extends Component {
     let newMainDishes = this.state.mainDishes.slice();
     let newSubDishes = this.state.subDishes.slice();
 
-    newMainDishes = this.shuffleArray(newMainDishes);
-    newSubDishes = this.shuffleArray(newSubDishes);
+    newMainDishes = this.shuffleArray(mainData);
+    newSubDishes = this.shuffleArray(subData);
 
     newMainDishes = newMainDishes.slice(0, 7);
     newSubDishes = newSubDishes.slice(0, 7);
@@ -78,6 +78,7 @@ export default class BuildMenu extends Component {
   }
 
   componentDidMount() {
+    console.log(mainData);
     this.changeAllDishes();
   }
 
