@@ -14,6 +14,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+require('./controllers/dish').connect(app);
+require('./controllers/product').connect(app);
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -30,16 +36,16 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-const newProduct = new DB.Product({
+/* const newProduct = new DB.Product({
   name: 'Фасоль',
   price: 40,
 });
 
-newProduct.save();
+newProduct.save(); */
 
-const newDish = new DB.Dish({
-  name: 'Some',
-  products: [newProduct._id],
+/* const newDish = new DB.Dish({
+  name: 'Картошка с грибами',
+  products: [],
 });
 
 newDish
@@ -49,6 +55,6 @@ newDish
   })
   .catch((err) => {
     console.log(err);
-  });
+  }); */
 
 module.exports = app;
