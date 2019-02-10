@@ -10,7 +10,7 @@ const DB = require('./db/index');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -35,26 +35,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-/* const newProduct = new DB.Product({
-  name: 'Фасоль',
-  price: 40,
-});
-
-newProduct.save(); */
-
-/* const newDish = new DB.Dish({
-  name: 'Картошка с грибами',
-  products: [],
-});
-
-newDish
-  .save()
-  .then((dish) => {
-    console.log(dish);
-  })
-  .catch((err) => {
-    console.log(err);
-  }); */
 
 module.exports = app;
