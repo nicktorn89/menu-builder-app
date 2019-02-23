@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-const sandBrown = '#f2aa7a';
-
 export const DishesBlock = styled.div`
   display: grid;
   justify-items: center;
@@ -30,7 +28,7 @@ export const DishRemove = styled.span`
   
   &:hover {
     cursor: pointer;
-    color: ${sandBrown};
+    color: ${props => props.theme.sandBrown};
   }
 `;
 

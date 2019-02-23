@@ -126,7 +126,6 @@ export default class BuildMenu extends Component {
 }
 
 // TODO: Create one file for all styles
-const sandBrownTransparent = '#f2aa7a80';
 
 const BuildMenuContainer = styled(PageContainer)`
   height: 90vh;
@@ -144,5 +143,5 @@ const BuildMenuButton = styled(Button)`
   padding: 1em 0;
   align-self: center;
   justify-self: center;
-  background-color: ${sandBrownTransparent};
+  background-color: ${props => props.theme.sandBrownTransparent};
 `;

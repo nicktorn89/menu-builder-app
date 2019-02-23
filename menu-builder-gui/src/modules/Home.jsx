@@ -54,20 +54,20 @@ const LinksContainer = styled.div`
     grid-template-rows: repeat(2, 1fr);
     grid-gap: 2em;
     align-items: flex-start;
-    background-color: ${lightSteel};
+    background-color: ${props => props.theme.lightSteel};
 `;
 
 const StyledLink = styled(Link)`
     display: block;
-    background-color: ${lightSteel};
-    border: 2px solid ${sandBrown};
+    background-color: ${props => props.theme.lightSteel};
+    border: 2px solid ${props => props.theme.sandBrown};
     border-radius: 2em;
     padding: 7vh 0;
     text-decoration: none;
-    color: ${slateGray};
+    color: ${props => props.theme.slateGray};
 
     &:hover {
-        background-color: ${sandBrown};
+        background-color: ${props => props.theme.sandBrown};
     }
 `;
 
@@ -78,5 +78,5 @@ const StyledButtonLink = styled.div`
     font-size: 1.5em;
     text-align: center;
     padding: 2em 0;
-    color: ${darkSlate};
+    color: ${props => props.theme.darkSlate};
 `;
