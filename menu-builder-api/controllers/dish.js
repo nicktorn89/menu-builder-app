@@ -1,11 +1,12 @@
 const DB = require('../db/index');
 
+// Get list with dishes
 const getDishes = (req, res) => {
 	DB.Dish.find({}) // Find all dishes 
 		.then((dishes) => {			
 			return res.json({
 				status: 0,
-				dishes: dishes, // Set all to response
+				dishes: dishes, // Set all dishes to response
 			});
 		})
 };

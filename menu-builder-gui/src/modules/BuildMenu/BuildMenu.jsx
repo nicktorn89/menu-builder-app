@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-import Header from '../components/Header';
-import PageContainer from '../components/PageContainer';
-import Button from '../components/Button';
-import Day from '../components/Day';
+import Header from '../../components/Header';
+import PageContainer from '../../components/PageContainer';
+import Button from '../../components/Button';
+import Day from '../../components/Day';
 
-import mainData from '../data/main.json';
-import subData from '../data/sub.json';
+import mainData from '../../data/main.json';
+import subData from '../../data/sub.json';
 
-import images from '../images/images';
+import images from '../../images/images';
+
+import { getMainDishes } from './fetch';
 
 export default class BuildMenu extends Component {
   constructor(props){
@@ -18,8 +19,10 @@ export default class BuildMenu extends Component {
     this.state = {
       daysArray: ['Понедельник', 'Вторник', 
     'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'],
-      mainDishes: mainData,
-      subDishes: subData,
+      mainDishes: [],
+      subDishes: [],
+      allDishes: mainData,
+      allSubDishes: subData,
     }
 
     this.shuffleArray = this.shuffleArray.bind(this);
@@ -33,15 +36,13 @@ export default class BuildMenu extends Component {
     });
   }
 
-  changeAllDishes() {
-    let newMainDishes = this.state.mainDishes.slice();
-    let newSubDishes = this.state.subDishes.slice();
+  changeAllDishes() { // For setting new menu from scratch
+    const { allDishes, allSubDishes } = this.state;
 
-    newMainDishes = this.shuffleArray(mainData);
-    newSubDishes = this.shuffleArray(subData);
+    let newMainDishes, newSubDishes;
 
-    newMainDishes = newMainDishes.slice(0, 7);
-    newSubDishes = newSubDishes.slice(0, 7);
+    newMainDishes = this.shuffleArray(allDishes).slice(0, 7);
+    newSubDishes = this.shuffleArray(allSubDishes).slice(0, 7);
 
     this.setState({
       mainDishes: newMainDishes,
@@ -51,13 +52,14 @@ export default class BuildMenu extends Component {
 
   changeOneDish(event) {
     const { target } = event;
+    const { allDishes, allSubDishes } = this.state;
 
     if (target.tagName === 'svg') {
       const { classList } = target.parentNode;
-      const classIndex = classList[0][classList[0].length-1];
+      const classIndex = classList[0][classList[0].length-1]; // Getting index of dish to refresh
 
       const setNewDishes = (array, data, stateName) => {
-        let newDishes = array;
+        let newDishes = array.slice();
         const shuffledDishes = this.shuffleArray(data);
         newDishes[classIndex] = shuffledDishes[0];
         this.setState({
@@ -65,21 +67,24 @@ export default class BuildMenu extends Component {
         });
       };
 
-      if( classList[0].search(/main-/i) >= 0) {
-        setNewDishes(this.state.mainDishes, mainData, 'mainDishes');
+      if( classList[0].search(/main-/i) >= 0) { // All svg targets have html class with 'main' or 'sub'
+        setNewDishes(this.state.mainDishes, allDishes, 'mainDishes');
       } else {
-        setNewDishes(this.state.subDishes, subData, 'subDishes');
+        setNewDishes(this.state.subDishes, allSubDishes, 'subDishes');
       }
     }
   }
 
-  handleBuildMenu() {
-    this.changeAllDishes();
-  }
-
   componentDidMount() {
-    console.log(mainData);
-    this.changeAllDishes();
+    getMainDishes()
+      .then((data) => {
+        this.setState({
+          allDishes: data.dishes
+        });
+      })
+      .then(() => {
+        this.changeAllDishes();
+      });
   }
 
   render() {
@@ -88,7 +93,7 @@ export default class BuildMenu extends Component {
     const showDays = daysArray.map((key, index) => (
       <Day key={index} 
       dayHeading={key}
-      mainDish={mainDishes[index]}
+      mainDish={mainDishes[index] && mainDishes[index].name}
       subDish={subDishes[index]}
       onClick={this.changeOneDish}
       index={index}
@@ -102,13 +107,14 @@ export default class BuildMenu extends Component {
 
         <BuildMenuContainer>
           {showDays}
-          <BuildMenuButton onClick={this.handleBuildMenu.bind(this)} text="Построить меню"/>
+          <BuildMenuButton onClick={this.changeAllDishes.bind(this)} text="Построить меню"/>
         </BuildMenuContainer>
       </React.Fragment>
     );
   }
 }
 
+// TODO: Create one file for all styles
 const sandBrownTransparent = '#f2aa7a80';
 
 const BuildMenuContainer = styled(PageContainer)`

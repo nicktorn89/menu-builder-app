@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 import Header from '../../components/Header';
 import PageContainer from '../../components/PageContainer';
 import Message from '../../components/Message';
 import Button from '../../components/Button';
+
+import { getMainDishes } from '../BuildMenu/fetch';
+import { addDish, removeDish } from './fetch';
 
 export default class AddDish extends Component {
   constructor(props) {
@@ -27,15 +29,10 @@ export default class AddDish extends Component {
   }
 
   getDishes() {
-    fetch('/dishes', {
-		  method: 'GET',
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((responseDishes) => {
+    getMainDishes()
+      .then((data) => {
         this.setState({
-          dishes: responseDishes.dishes,
+          dishes: data.dishes,
           connect: true,
         });
       })
@@ -58,16 +55,7 @@ export default class AddDish extends Component {
     const { dishName } = this.state;
 
     if (dishName.length > 0) {
-      fetch('/dishes/addDish', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name: dishName,
-        }),
-      })
+      addDish(dishName)
         .then((data) => {
           this.getDishes();
           this.setState({
@@ -82,30 +70,25 @@ export default class AddDish extends Component {
   
   removeDish(e) {
     const position = e.target.id;
-    const dishId = this.state.dishes[position]._id;
-    
-    fetch('/dishes/removeDish', {
-      method: 'DELETE',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          id: dishId,
-        }),
-    })
-      .then(() => {
-        this.getDishes();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    const dishId = this.state.dishes[position]._id; // This id is id from mongo
+
+    const accept = global.confirm('Удалить блюдо?');
+
+    if(accept) { // TODO: Add modal window for confirm removing dish
+      removeDish(dishId)
+        .then(() => {
+          this.getDishes();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   render() {
     const showDishes = this.state.dishes.map((key, index) => (
-      <DishItem key={index}>
-        <DishName>{key.name}</DishName>
+      <DishItem key={key._id ? key._id : index}>
+        <DishName>№{index+1} {key.name}</DishName>
         <DishRemove onClick={this.removeDish} id={index}>X</DishRemove>
         <DishDate>Дата создания - {(() => {
           const date = new Date(key.date);
@@ -131,8 +114,12 @@ export default class AddDish extends Component {
             {showDishes}
           </DishesBlock>
 
-          <InputForDishes onChange={this.handleDishName}></InputForDishes>
-          <Button onClick={this.addDish}>Добавить блюдо</Button>
+          <AddBlock>
+            <InputForDishes
+            placeholder="Введите название блюда"
+            onChange={this.handleDishName}></InputForDishes>
+            <Button onClick={this.addDish}>Добавить блюдо</Button>
+          </AddBlock>
 
           {
             this.state.showMessage && <Message onClick={() => {
@@ -145,9 +132,16 @@ export default class AddDish extends Component {
   }
 };
 
+const sandBrown = '#f2aa7a'
+
 const DishesBlock = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  padding: 1rem;
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 2rem;
 `;
 
@@ -168,6 +162,7 @@ const DishRemove = styled.span`
   
   &:hover {
     cursor: pointer;
+    color: ${sandBrown};
   }
 `;
 
@@ -177,4 +172,13 @@ const DishDate = styled.span`
 
 const InputForDishes = styled.input`
   width: 30%;
+`;
+
+const AddBlock = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+  width: 70%;
+  margin: 1rem auto 0 auto;
+  justify-items: center;
+  align-items: center;
 `;

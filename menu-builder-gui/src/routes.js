@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import Home from './modules/Home.jsx';
 import About from './modules/About.jsx';
-import BuildMenu from './modules/BuildMenu.jsx';
+import BuildMenu from './modules/BuildMenu/BuildMenu.jsx';
 import AddDish from './modules/AddDish/AddDish.jsx';
 import FoodStore from './modules/FoodStore.jsx';
 import BudgetSettings from './modules/BudgetSettings.jsx';
