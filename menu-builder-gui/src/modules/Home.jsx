@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import Header from '../components/Header';
@@ -10,13 +10,13 @@ export default class Home extends Component {
         this.state = {
             allLinks: [
                 '/about', '/build-menu',
-                '/add-dish', '/food-store',
+                '/add-dish', '/add-sub-dish', '/food-store',
                 '/budget-settings',
             ],
             allTitles: [
                 'О приложении', 'Построить меню',
-                'Добавить новое блюдо', 'Хранилище',
-                'Бюджет'],
+                'Добавить новое блюдо', 'Добавить доп блюдо',
+                'Хранилище', 'Бюджет'],
         };
     }
 
@@ -50,7 +50,8 @@ const LinksContainer = styled.div`
     padding: 1vh 2em;
     
     display: grid;
-	grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     grid-gap: 2em;
     align-items: flex-start;
     background-color: ${lightSteel};
