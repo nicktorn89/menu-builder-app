@@ -8,8 +8,8 @@ import PageContainer from '../../components/PageContainer';
 import Message from '../../components/Message';
 import Button from '../../components/Button';
 
-import { getMainDishes } from '../BuildMenu/fetch';
-// import { addDish, removeDish } from './fetch';
+import { getSubDishes } from '../BuildMenu/fetch';
+import { addSubDish, removeSubDish } from './fetch';
 
 export default class AddDish extends Component {
   constructor(props) {
@@ -26,12 +26,13 @@ export default class AddDish extends Component {
     this.handleDishName = this.handleDishName.bind(this);
     this.getDishes = this.getDishes.bind(this);
   }
+
   componentDidMount() {
     this.getDishes();
   }
 
   getDishes() {
-    getMainDishes()
+    getSubDishes()
       .then((data) => {
         this.setState({
           dishes: data.dishes,
@@ -39,7 +40,8 @@ export default class AddDish extends Component {
         });
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
+
         this.setState({
           connect: false,
           showMessage: true,
@@ -57,7 +59,7 @@ export default class AddDish extends Component {
     const { dishName } = this.state;
 
     if (dishName.length > 0) {
-      /* addDish(dishName)
+      addSubDish(dishName)
         .then((data) => {
           this.getDishes();
           this.setState({
@@ -65,8 +67,8 @@ export default class AddDish extends Component {
           });
         })
         .catch((err) => {
-          console.log(err);
-        }); */
+          console.error(err);
+        });
     }
   }
   
@@ -77,15 +79,13 @@ export default class AddDish extends Component {
     const accept = global.confirm('Удалить блюдо?');
 
     if(accept) { // TODO: Add modal window for confirm removing dish
-      /* removeDish(dishId) 
+      removeSubDish(dishId) 
         .then(() => {
           this.getDishes();
         })
         .catch((err) => {
           console.log(err);
-        }); */
-      
-      // TODO: Add methods for subdishes
+        });
     }
   }
 

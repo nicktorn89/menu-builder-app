@@ -1,5 +1,5 @@
 export function addSubDish(dishName) {
-  return fetch('/dishes/addDish', {
+  return fetch('/sub-dishes/addSubDish', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -19,7 +19,7 @@ export function addSubDish(dishName) {
 };
 
 export function removeSubDish(dishId) {
-  return fetch('/dishes/removeDish', {
+  return fetch('/sub-dishes/removeSubDish', {
     method: 'DELETE',
     headers: {
     'Accept': 'application/json',
@@ -36,4 +36,4 @@ export function removeSubDish(dishId) {
         return response.json();
       }
     });
-}
+};

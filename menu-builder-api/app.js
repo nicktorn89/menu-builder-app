@@ -16,6 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 require('./controllers/dish').connect(app);
 require('./controllers/product').connect(app);
+require('./controllers/subdish').connect(app);
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

@@ -11,7 +11,7 @@ import subData from '../../data/sub.json';
 
 import images from '../../images/images';
 
-import { getMainDishes } from './fetch';
+import { getMainDishes, getSubDishes } from './fetch';
 
 export default class BuildMenu extends Component {
   constructor(props){
@@ -67,7 +67,8 @@ export default class BuildMenu extends Component {
         });
       };
 
-      if( classList[0].search(/main-/i) >= 0) { // All svg targets have html class with 'main' or 'sub'
+      // All svg targets have html class with 'main' or 'sub'
+      if( classList[0].search(/main-/i) >= 0) {
         setNewDishes(this.state.mainDishes, allDishes, 'mainDishes');
       } else {
         setNewDishes(this.state.subDishes, allSubDishes, 'subDishes');
@@ -79,7 +80,17 @@ export default class BuildMenu extends Component {
     getMainDishes()
       .then((data) => {
         this.setState({
-          allDishes: data.dishes
+          allDishes: data.dishes,
+        });
+      })
+      .then(() => {
+        this.changeAllDishes();
+      });
+
+    getSubDishes()
+      .then((data) => {
+        this.setState({
+          allSubDishes: data.dishes,
         });
       })
       .then(() => {
@@ -91,13 +102,13 @@ export default class BuildMenu extends Component {
     const { daysArray, mainDishes, subDishes } = this.state;
 
     const showDays = daysArray.map((key, index) => (
-      <Day key={index} 
+      <Day key={index}
       dayHeading={key}
       mainDish={mainDishes[index] && mainDishes[index].name}
-      subDish={subDishes[index]}
+      subDish={subDishes[index] && subDishes[index].name}
       onClick={this.changeOneDish}
       index={index}
-      haveSub={index % 2 !== 0}
+      haveSub={index % 2 !== 0} // If have sub then day will show sub dish
       />
     ));
 

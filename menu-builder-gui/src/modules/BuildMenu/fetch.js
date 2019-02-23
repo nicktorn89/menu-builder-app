@@ -7,4 +7,15 @@ export function getMainDishes() {
       return response.json();
     }
   });
-}
+};
+
+export function getSubDishes() {
+  return fetch('/sub-dishes')
+  .then((response) => {
+    if (!response.ok) {
+      throw Error(response.statusText);
+    } else {
+      return response.json();
+    }
+  });
+};
