@@ -9,6 +9,9 @@ const getDishes = (req, res) => {
 				dishes: dishes, // Set all dishes to response
 			});
 		})
+		.catch((err) => {
+			console.error(err);
+		});
 };
 
 const addDish = (req, res) => {
@@ -25,7 +28,7 @@ const addDish = (req, res) => {
 			})
 			.catch((err) => {
 				console.log(err);
-			})
+			});
 	} else {
 		return;
 	}

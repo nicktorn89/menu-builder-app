@@ -1,43 +1,37 @@
 import React, { Component } from 'react';
+
 import styled from 'styled-components';
 
 import Header from '../../components/Header';
-import PageContainer from '../../components/PageContainer';
 import Message from '../../components/Message';
 import Button from '../../components/Button';
+import PageContainer from '../../components/PageContainer';
 
-import { getMainDishes } from '../BuildMenu/fetch';
-import { addDish, removeDish } from './fetch';
+import { getProducts, addProduct, removeProduct } from './fetch';
 
-export default class AddDish extends Component {
+export default class FoodStore extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dishes: [],
-      dishName: '',
-      connect: false,
-      showMessage: false,
-    };
+      prods: [],
+    }
 
-    this.addDish = this.addDish.bind(this);
-    this.removeDish = this.removeDish.bind(this);
-    this.handleDishName = this.handleDishName.bind(this);
-    this.getDishes = this.getDishes.bind(this);
-  }
-  componentDidMount() {
-    this.getDishes();
+    this.getProducts = this.getProducts.bind(this);
+    this.addProduct = this.addProduct.bind(this);
+    this.removeProduct = this.removeProduct.bind(this);
+    this.handleProductName = this.handleProductName.bind(this);
   }
 
-  getDishes() {
-    getMainDishes()
+  getProducts() {
+    getProducts()
       .then((data) => {
         this.setState({
-          dishes: data.dishes,
+          prods: data.products,
           connect: true,
         });
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         this.setState({
           connect: false,
           showMessage: true,
@@ -45,21 +39,15 @@ export default class AddDish extends Component {
       });
   }
 
-  handleDishName(e) {
-    this.setState({
-      dishName: e.target.value,
-    });
-  }
+  addProduct() {
+    const { prodName } = this.state;
 
-  addDish() {
-    const { dishName } = this.state;
-
-    if (dishName.length > 0) {
-      addDish(dishName)
+    if (prodName.length > 0) {
+      addProduct(prodName)
         .then((data) => {
-          this.getDishes();
+          this.getProducts();
           this.setState({
-            dishName: '',
+            prodName: '',
           });
         })
         .catch((err) => {
@@ -68,16 +56,16 @@ export default class AddDish extends Component {
     }
   }
   
-  removeDish(e) {
+  removeProduct(e) {
     const position = e.target.id;
-    const dishId = this.state.dishes[position]._id; // This id is id from mongo
+    const prodId = this.state.prods[position]._id; // This id is id from mongo
 
-    const accept = global.confirm('Удалить блюдо?');
+    const accept = global.confirm('Удалить продукт?');
 
     if(accept) { // TODO: Add modal window for confirm removing dish
-      removeDish(dishId)
+      removeProduct(prodId)
         .then(() => {
-          this.getDishes();
+          this.getProducts();
         })
         .catch((err) => {
           console.log(err);
@@ -85,12 +73,22 @@ export default class AddDish extends Component {
     }
   }
 
+  handleProductName(e) {
+    this.setState({
+      prodName: e.target.value,
+    });
+  }
+
+  componentDidMount() {
+    this.getProducts();
+  }
+
   render() {
-    const showDishes = this.state.dishes.map((key, index) => (
-      <DishItem key={key._id ? key._id : index}>
-        <DishName>№{index+1} {key.name}</DishName>
-        <DishRemove onClick={this.removeDish} id={index}>X</DishRemove>
-        <DishDate>Дата создания - {(() => {
+    const showProds = this.state.prods.map((key, index) => (
+      <ProdItem key={key._id ? key._id : index}>
+        <ProdName>№{index+1} {key.name}</ProdName>
+        <ProdRemove onClick={this.removeProduct} id={index}>X</ProdRemove>
+        <ProdDate>Дата создания - {(() => {
           const date = new Date(key.date);
           let month;
 
@@ -101,8 +99,8 @@ export default class AddDish extends Component {
           }
 
           return `${date.getDate()}.${month}.${date.getFullYear()}`;
-        })() }</DishDate>
-      </DishItem>
+        })() }</ProdDate>
+      </ProdItem>
     ));
 
     return (
@@ -111,14 +109,14 @@ export default class AddDish extends Component {
 
         <PageContainer>
           <DishesBlock>
-            {showDishes}
+            {showProds}
           </DishesBlock>
 
           <AddBlock>
-            <InputForDishes
+            <InputForProds
             placeholder="Введите название блюда"
-            onChange={this.handleDishName}></InputForDishes>
-            <Button onClick={this.addDish}>Добавить блюдо</Button>
+            onChange={this.handleProductName} />
+            <Button onClick={this.addProduct}>Добавить блюдо</Button>
           </AddBlock>
 
           {
@@ -143,19 +141,19 @@ const DishesBlock = styled.div`
   grid-gap: 2rem;
 `;
 
-const DishItem = styled.div`
+const ProdItem = styled.div`
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(2, 1fr);
   grid-row-gap: 1rem;
 `;
 
-const DishName = styled.span`
+const ProdName = styled.span`
   font-size: 1.3rem;
   font-weight: bold;
 `;
 
-const DishRemove = styled.span`
+const ProdRemove = styled.span`
   font-size: 1.3rem;
   
   &:hover {
@@ -164,11 +162,11 @@ const DishRemove = styled.span`
   }
 `;
 
-const DishDate = styled.span`
+const ProdDate = styled.span`
   font-size: 1.2rem;
 `;
 
-const InputForDishes = styled.input`
+const InputForProds = styled.input`
   width: 30%;
 `;
 

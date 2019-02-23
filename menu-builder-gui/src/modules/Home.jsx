@@ -40,11 +40,6 @@ export default class Home extends Component {
     }
 }
 
-const sandBrown = '#f2aa7a';
-const darkSlate = '#121514';
-const lightSteel = '#d9dfe1';
-const slateGray = '#7d97a0';
-
 const LinksContainer = styled.div`
     height: 89vh;
     padding: 1vh 2em;

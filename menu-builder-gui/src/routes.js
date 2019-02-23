@@ -6,7 +6,7 @@ import About from './modules/About.jsx';
 import BuildMenu from './modules/BuildMenu/BuildMenu.jsx';
 import AddDish from './modules/AddDish/AddDish.jsx';
 import AddSubDish from './modules/AddSubDish/AddSubDish.jsx';
-import FoodStore from './modules/FoodStore.jsx';
+import FoodStore from './modules/FoodStore/FoodStore.jsx';
 import BudgetSettings from './modules/BudgetSettings.jsx';
 
 class Routes extends Component {

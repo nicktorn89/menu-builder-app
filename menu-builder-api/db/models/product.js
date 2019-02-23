@@ -7,7 +7,9 @@ const productSchema = new mongoose.Schema({
     },
     price: {
         type: Number,
-        required: true,
+        // required: true, 
+        // TODO: Add in FoodStore.jsx way to add price
+        default: 0,
     },
     date: {
         type: Date,

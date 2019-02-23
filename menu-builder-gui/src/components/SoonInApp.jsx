@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
 
 export default function SoonInApp(props) {
     return(
@@ -16,7 +16,6 @@ export default function SoonInApp(props) {
 };
 
 const slateGray = '#7d97a0';
-const sandBrown = '#f2aa7a';
 const fulfilledColor = '#00fa99';
 
 const SoonContainer = styled.div`

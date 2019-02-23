@@ -7,7 +7,6 @@ import { ThemeProvider } from 'styled-components';
 import './styles/reset.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faRedo} from '@fortawesome/free-solid-svg-icons';
 
 library.add(faArrowLeft, faRedo);
@@ -18,6 +17,7 @@ const colorPallete = {
   lightSteel: '#d9dfe1',
   slateGray: '#7d97a0',
   sandBrownTransparent: '#f2aa7a80',
+  peru: '#c28a5d',
 };
 
 ReactDOM.render(

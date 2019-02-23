@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -23,16 +23,10 @@ export default class Header extends Component {
     }
 };
 
-const sandBrown = '#f2aa7a';
-const peru = '#c28a5d';
-const darkSlate = '#121514';
-const lightSteel = '#d9dfe1';
-const slateGray = '#7d97a0';
-
 const HeaderContainer = styled.header`
     padding: 3.5vh 0 3.5vh 1em;
-    background-color: ${slateGray};
-    border-bottom: 1px solid ${lightSteel};
+    background-color: ${props => props.theme.slateGray};
+    border-bottom: 1px solid ${props => props.theme.lightSteel};
 `;
 
 const MainHeading = styled.h1`
@@ -44,13 +38,13 @@ const MainHeading = styled.h1`
 const HeaderLink = styled(Link)`
     margin-left: 1em;
     text-decoration: none;
-    color: ${darkSlate};
+    color: ${props => props.theme.darkSlate};
     font-size: 1.2rem;
     transition-property: color, font-weight;
     transition-duration: 0.3s;
 
     &:hover {
-        color: ${sandBrown};
+        color: ${props => props.theme.sandBrown};
         font-weight: 900;
     }
 `;

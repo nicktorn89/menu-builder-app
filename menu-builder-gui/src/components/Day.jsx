@@ -1,5 +1,5 @@
-import React, { Component, Fragment} from 'react';
-import styled, { css } from 'styled-components';
+import React, { Fragment} from 'react';
+import styled from 'styled-components';
 import Button from './Button';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -33,11 +33,6 @@ export default function Day({ dayHeading, mainDish, subDish, onClick, index, hav
     );
 };
 
-const slateGray = '#7d97a0';
-const peru = '#c28a5d';
-const sandBrownTransparent = '#f2aa7a80';
-const darkSlate = '#121514';
-
 const DayButton = styled(Button)`
     width: 1em;
     color: black;
@@ -56,8 +51,8 @@ const DayContainer = styled.div`
 
 const DayHeading = styled.h2`
     text-align: center;
-    background-color: ${peru};
-    color: ${darkSlate};
+    background-color: ${props => props.theme.peru};
+    color: ${props => props.theme.darkSlate};
     font-size: 1.5em;
     border-radius: 2rem 2rem 0 0;
     padding: 1rem 0;
@@ -68,9 +63,9 @@ const MainDishContainer = styled.div`
     justify-content: center;
     align-items: center;
     padding: 1rem 0;
-    border: 2px solid ${peru};
+    border: 2px solid ${props => props.theme.peru};
     border-bottom: none;
-    background-color: ${sandBrownTransparent};
+    background-color: ${props => props.theme.sandBrownTransparent};
 
     span {
         font-size: 1.3em;
@@ -83,9 +78,9 @@ const SubDishContainer = styled.div`
     align-items: center;
     padding: 1rem 0;
     height: 8rem;
-    border: 2px solid ${peru};
+    border: 2px solid ${props => props.theme.peru};
     border-top: none;
-    background-color: ${sandBrownTransparent};
+    background-color: ${props => props.theme.sandBrownTransparent};
 
     span {
         font-size: 1.3em;

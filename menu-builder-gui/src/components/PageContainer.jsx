@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import styled from 'styled-components';
 
 export default function PageContainer({className, children}) {
     return (
