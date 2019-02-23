@@ -9,9 +9,6 @@ export default function Message({className, onClick, children}) {
     );
 }
 
-const sandBrown = '#f2aa7a';
-const darkSlate = '#121514';
-
 const MessageBody = styled.div`
     position: absolute;
     top: 85%;
@@ -19,13 +16,13 @@ const MessageBody = styled.div`
     width: 14rem;
     padding: 2rem 0;
     cursor: pointer;
-    border: 2px solid ${sandBrown};
+    border: 2px solid ${props => props.theme.sandBrown};
     border-radius: 2rem;
     text-align: center;
 
     &:hover {
-        background-color: ${sandBrown};
-        color: ${darkSlate};
+        background-color: ${props => props.theme.sandBrown};
+        color: ${props => props.theme.darkSlate};
     }
 `;
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import Home from './modules/Home.jsx';
+import Home from './modules/Home/Home.jsx';
 import About from './modules/About.jsx';
 import BuildMenu from './modules/BuildMenu/BuildMenu.jsx';
 import AddDish from './modules/AddDish/AddDish.jsx';
