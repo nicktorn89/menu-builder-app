@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 
 import Header from '../../components/Header';
 import PageContainer from '../../components/PageContainer';
 import Message from '../../components/Message';
 import Button from '../../components/Button';
+import List from '../../components/List/List';
+
+import { DishesBlock, InputForDishes, AddBlock } from './styled';
 
 import { getMainDishes } from '../BuildMenu/fetch';
 import { addDish, removeDish } from './fetch';
@@ -86,32 +88,13 @@ export default class AddDish extends Component {
   }
 
   render() {
-    const showDishes = this.state.dishes.map((key, index) => (
-      <DishItem key={key._id ? key._id : index}>
-        <DishName>№{index+1} {key.name}</DishName>
-        <DishRemove onClick={this.removeDish} id={index}>X</DishRemove>
-        <DishDate>Дата создания - {(() => {
-          const date = new Date(key.date);
-          let month;
-
-          if (date.getMonth() < 10) {
-            month = `0${date.getMonth()}`;
-          } else {
-            month = date.getMonth();
-          }
-
-          return `${date.getDate()}.${month}.${date.getFullYear()}`;
-        })() }</DishDate>
-      </DishItem>
-    ));
-
     return (
       <React.Fragment>
       	<Header />
 
         <PageContainer>
           <DishesBlock>
-            {showDishes}
+            <List data={this.state.dishes} removeDish={this.removeDish}/>
           </DishesBlock>
 
           <AddBlock>
@@ -131,52 +114,3 @@ export default class AddDish extends Component {
     );
   }
 };
-
-const DishesBlock = styled.div`
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  width: 80%;
-  margin: 0 auto;
-  padding: 1rem;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 2rem;
-`;
-
-const DishItem = styled.div`
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  grid-template-columns: repeat(2, 1fr);
-  grid-row-gap: 1rem;
-`;
-
-const DishName = styled.span`
-  font-size: 1.3rem;
-  font-weight: bold;
-`;
-
-const DishRemove = styled.span`
-  font-size: 1.3rem;
-  
-  &:hover {
-    cursor: pointer;
-    color: ${props => props.theme.sandBrown};
-  }
-`;
-
-const DishDate = styled.span`
-  font-size: 1.2rem;
-`;
-
-const InputForDishes = styled.input`
-  width: 30%;
-`;
-
-const AddBlock = styled.div`
-  display: grid;
-  grid-gap: 1rem;
-  width: 70%;
-  margin: 1rem auto 0 auto;
-  justify-items: center;
-  align-items: center;
-`;

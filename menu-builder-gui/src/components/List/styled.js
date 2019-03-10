@@ -1,21 +1,23 @@
 import styled from 'styled-components';
 
-export const DishesBlock = styled.div`
-  display: grid;
-  justify-items: center;
-  align-items: center;
+export const ListContainer = styled.div`
   width: 80%;
-  margin: 0 auto;
-  padding: 1rem;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 2rem;
+  height: 100%;
+  padding: 1rem 0;
+  display: grid;
+  grid-row-gap: 1rem;
+  overflow: auto;
+  background-color: ${props => props.theme.peru};
+  border-radius: 1rem;
 `;
 
 export const DishItem = styled.div`
+  width: 80rem;
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(2, 1fr);
   grid-row-gap: 1rem;
+  text-align: center;
 `;
 
 export const DishName = styled.span`
@@ -34,17 +36,4 @@ export const DishRemove = styled.span`
 
 export const DishDate = styled.span`
   font-size: 1.2rem;
-`;
-
-export const InputForDishes = styled.input`
-  width: 30%;
-`;
-
-export const AddBlock = styled.div`
-  display: grid;
-  grid-gap: 1rem;
-  width: 70%;
-  margin: 1rem auto 0 auto;
-  justify-items: center;
-  align-items: center;
 `;

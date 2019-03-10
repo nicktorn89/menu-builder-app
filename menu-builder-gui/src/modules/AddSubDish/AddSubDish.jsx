@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-import { DishesBlock, DishItem, DishName, 
-  DishRemove, DishDate, InputForDishes, AddBlock } from '../AddDish/styles.js';
-
 import Header from '../../components/Header';
 import PageContainer from '../../components/PageContainer';
 import Message from '../../components/Message';
 import Button from '../../components/Button';
+import List from '../../components/List/List';
+
+import { DishesBlock, InputForDishes, AddBlock } from '../AddDish/styled';
 
 import { getSubDishes } from '../BuildMenu/fetch';
 import { addSubDish, removeSubDish } from './fetch';
@@ -90,24 +90,7 @@ export default class AddDish extends Component {
   }
 
   render() {
-    const showDishes = this.state.dishes.map((key, index) => (
-      <DishItem key={key._id ? key._id : index}>
-        <DishName>№{index+1} {key.name}</DishName>
-        <DishRemove onClick={this.removeDish} id={index}>X</DishRemove>
-        <DishDate>Дата создания - {(() => {
-          const date = new Date(key.date);
-          let month;
-
-          if (date.getMonth() < 10) {
-            month = `0${date.getMonth()}`;
-          } else {
-            month = date.getMonth();
-          }
-
-          return `${date.getDate()}.${month}.${date.getFullYear()}`;
-        })() }</DishDate>
-      </DishItem>
-    ));
+    const { dishes } = this.state;
 
     return (
       <React.Fragment>
@@ -115,7 +98,7 @@ export default class AddDish extends Component {
 
         <PageContainer>
           <DishesBlock>
-            {showDishes}
+            <List data={dishes} removeDish={this.removeDish} />
           </DishesBlock>
 
           <AddBlock>
