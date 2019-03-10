@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Home from './modules/Home/Home.jsx';
-import About from './modules/About.jsx';
+import Stats from './modules/Stats.jsx';
 import BuildMenu from './modules/BuildMenu/BuildMenu.jsx';
 import AddDish from './modules/AddDish/AddDish.jsx';
 import AddSubDish from './modules/AddSubDish/AddSubDish.jsx';
@@ -20,7 +20,7 @@ class Routes extends Component {
           <Route path="/add-sub-dish" component={AddSubDish} />
           <Route path="/food-store" component={FoodStore} />
           <Route path="/budget-settings" component={BudgetSettings} />
-          <Route path="/about" component={About} />
+          <Route path="/stats" component={Stats} />
         </div>
       </Router>
     );

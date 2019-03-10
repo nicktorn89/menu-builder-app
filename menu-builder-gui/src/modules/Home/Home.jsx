@@ -8,12 +8,12 @@ export default class Home extends Component {
         super(props);
         this.state = {
             allLinks: [
-                '/about', '/build-menu',
+                '/stats', '/build-menu',
                 '/add-dish', '/add-sub-dish', '/food-store',
                 '/budget-settings',
             ],
             allTitles: [
-                'О приложении', 'Построить меню',
+                'Статистика', 'Построить меню',
                 'Добавить новое блюдо', 'Добавить доп блюдо',
                 'Хранилище', 'Бюджет'],
         };
