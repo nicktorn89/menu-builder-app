@@ -13,17 +13,27 @@ import image12 from './12.jpg';
 import image13 from './13.jpg';
 
 export default function ImagesArray() {
-    const shuffleArray = (array) => {
-        return array.sort(function () {
-          return 0.5 - Math.random();
-        });
-    }
+  const shuffleArray = array => {
+    return array.sort(() => {
+      return 0.5 - Math.random();
+    });
+  };
 
-    let allImages = [
-        image1, image2, image3, image4, image5, image6,
-        image7, image8, image9, image10, image11, image12,
-        image13
-    ];
+  const allImages = [
+    image1,
+    image2,
+    image3,
+    image4,
+    image5,
+    image6,
+    image7,
+    image8,
+    image9,
+    image10,
+    image11,
+    image12,
+    image13
+  ];
 
-    return shuffleArray(allImages);
+  return shuffleArray(allImages);
 }
